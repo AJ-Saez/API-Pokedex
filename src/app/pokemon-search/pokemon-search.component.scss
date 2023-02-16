@@ -1,0 +1,374 @@
+/**********************/
+/* style for mobile */
+/**********************/
+
+
+@media screen and (max-width:600px){
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ .buscador img{
+  width: 200px;
+
+}
+
+
+.buscador{
+  /* margin: 20px 0px 20px 70px; */
+  text-align: center;
+  margin-top: 30px;
+}
+
+.buscador input{
+ /*  margin-left: 200px; */
+  width: 300px;
+  height: 30px;
+  border: solid 1px black;
+  font-size: 20px;
+  justify-content: center;
+}
+
+
+
+.buscador button{
+  margin-top: 20px;
+    width: 55px;
+    height: 25px;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+
+
+#tarjeta{
+  margin: 0px 30px ;
+  width: 300px;
+
+
+
+
+
+}
+
+.box{
+ margin-bottom: 20px;
+ background-color: white;
+ padding-bottom: 20px;
+ border-radius: 10px;
+}
+
+.col1{
+ /*  width:30% !important; */
+ margin: 10px;
+ }
+
+.col1 img{
+  width: 200px;
+}
+
+#mensaje{
+  justify-content: center;
+}
+
+.ocultar{
+  display: none;
+}
+
+.mostrar{
+display:block;
+}
+
+#lista-pk{
+  width: 200px;
+  border: solid 1px black;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.705);
+  border-radius: 10px;
+  margin-left: 80px;
+
+}
+
+#lista-pk li{
+  cursor: pointer;
+}
+
+.boton{
+  /* border: 1px solid white; */
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.efecto{
+display: inline-block;
+transform: perspective(1px) translateZ(0);
+}
+
+.efecto:hover,
+.efecto:focus,
+.efecto:active{
+animation-name: efectoBoton;
+animation-duration: 1s;
+animation-timing-function: ease-in-out;
+animation-iteration-count: 1;
+}
+
+@keyframes efectoBoton{
+17%{transform: translateY(8px);}
+34%{transform: translateY(-6px);}
+50%{transform: translateY(4px);}
+67%{transform: translateY(-2px);}
+84%{transform: translateY(1px);}
+100%{transform: translateY(0);}
+
+}
+
+.rojo{
+  background-color: red;
+  color: white;
+  border: 2px solid white;
+    }
+.azul{
+  background-color:blue;
+  color: white;
+  border: 2px solid white;
+    }
+.verde{
+  background-color: rgb(9, 238, 9);
+  color: white;
+  border: 2px solid white;
+}
+.rosa{
+  background-color: rgb(248, 7, 248);
+  color: white;
+  border: 2px solid white;
+}
+.negro{
+  background-color: rgb(77, 73, 73);
+  color: white;
+  border: 2px solid white;
+}
+.azul__claro{
+  background-color: rgba(9, 245, 233, 0.705);
+  color: white;
+  border: 2px solid white;
+}
+.naranja{
+  background-color: rgb(245, 170, 9);
+  color: white;
+  border: 2px solid white;
+}
+.rosa__claro{
+  background-color: rgb(200, 150, 202);
+  color: white;
+  border: 2px solid white;
+}
+.verde__claro{
+  background-color: rgb(0, 255, 191);
+  color: white;
+  border: 2px solid white;
+}
+.amarillo{
+  background-color: #f8f32b;
+  color: white;
+  border: 2px solid white;
+}
+
+
+
+
+}
+
+/**********************/
+/* style for desktop */
+/**********************/
+
+@media screen and (min-width:605px){
+
+  .buscador {
+    justify-content: center;
+    text-align: center;
+
+  }
+
+  #lista-pk{
+    width: 150px;
+    border: solid 1px black;
+    justify-content: center;
+    background-color: rgba(248, 211, 3, 0.699);
+    margin: 0px auto;
+    border-radius: 10px;
+  }
+  #lista-pk :hover{
+   background-color: white;
+  }
+
+  #lista-pk li{
+    cursor: pointer;
+  }
+
+  .ocultar{
+    display: none;
+  }
+
+.mostrar{
+  display:block;
+}
+
+
+  button{
+    width: 80px;
+    margin: 0px 10px;
+    border-radius: 2px;
+  }
+
+.boton{
+    
+    cursor: pointer;
+    border-radius: 5px;
+ }
+
+.efecto{
+  display: inline-block;
+  transform: perspective(1px) translateZ(0);
+ }
+
+ .efecto:hover,
+ .efecto:focus,
+ .efecto:active{
+  animation-name: efectoBoton;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+ }
+
+ @keyframes efectoBoton{
+  17%{transform: translateY(8px);}
+  34%{transform: translateY(-6px);}
+  50%{transform: translateY(4px);}
+  67%{transform: translateY(-2px);}
+  84%{transform: translateY(1px);}
+  100%{transform: translateY(0);}
+
+ }
+
+  #tarjeta{
+    margin: 20px 10px;
+    display:flex;
+    grid-gap:30px;
+    padding: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+    }
+
+ .listo-tarjeta{
+    border: solid 5px #0e16e3;
+    border-radius: 10px;
+  }
+
+
+
+.pokemon-grid{
+  display:grid;
+  grid-gap:16px;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+  }
+
+  .pokemon-grid-prin{
+    display:grid;
+    grid-gap:16px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+    }
+
+  .box{
+    width:100%;
+    height: 200px;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
+    display: grid;
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+  }
+
+ .col1{
+  width:30% !important;
+ }
+
+.ul_list ul{
+  justify-content: center;
+ }
+
+ .rojo{
+  background-color: red;
+  color: white;
+  border: 2px solid black;
+    }
+.azul{
+  background-color:blue;
+  color: white;
+  border: 2px solid black;
+    }
+.verde{
+  background-color: rgb(9, 238, 9);
+  color: white;
+  border: 2px solid black;
+}
+.rosa{
+  background-color: rgb(248, 7, 248);
+  color: white;
+  border: 2px solid black;
+}
+.negro{
+  background-color: rgb(77, 73, 73);
+  color: white;
+  border: 2px solid black;
+}
+.azul__claro{
+  background-color: rgba(9, 245, 233, 0.705);
+  color: white;
+  border: 2px solid black;
+}
+.naranja{
+  background-color: rgb(245, 170, 9);
+  color: white;
+  border: 2px solid black;
+}
+.rosa__claro{
+  background-color: rgb(236, 143, 240);
+  color: white;
+  border: 2px solid black;
+}
+.verde__claro{
+  background-color: rgb(0, 194, 145);
+  color: white;
+  border: 2px solid black;
+}
+.amarillo{
+  background-color: #b1ae03dc;
+  color: white(175, 173, 173);
+  border: 2px solid black;
+}
+
+
+img{
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+div .poke{
+  margin-left: 550px;
+}
+
+
+}
+
+

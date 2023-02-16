@@ -1,0 +1,43 @@
+<div class="buscador">
+        <!--- title-->
+
+<div>
+  <h1>Elije Tu Equipo Pokemon</h1>
+</div>
+
+  <img class="buscador" src="assets/img/poke.ball.png"alt="">
+  <br>
+  <input type="text" (keyup)="lister()" placeholder="Search pokemon" [(ngModel)]="name" value="{{name}}">
+
+    <ul id="lista-pk" class="ul_list {{display}}">
+    <li *ngFor="let pokemon of pokemons"  (click)="filter(pokemon.name)" >{{pokemon.name}}</li>
+    </ul>
+
+   <!--- list-->
+
+  <input type="hidden"  #ascantidad  [(ngModel)]="cantidad" id="cantidad">
+  <input type="hidden"  #ascantidad  [(ngModel)]="lista" id="lista">
+  <br>
+  <button id="playBtn" class="go boton efecto" (click)="search()">Start</button>
+  <button id="playBtn" class="sear boton efecto" (click)="reset()">Reset</button>
+  <button id="playBtn" class="sear boton efecto" (click)="aleatoria()">Random</button>
+
+  <div #asmensaje  id="mensaje" style="color:rgb(0, 159, 252)">{{mensaje}} </div>
+  <div #astarjeta id="tarjeta" class="{{tarjeta}} ">
+
+    <div id="{{pokemon.name}}" class="box {{pokemon.fondo}} col1 efecto"
+  *ngFor="let pokemon of pokemons_tj  ">
+    <img class="boton efecto"  [src]="pokemon.img" alt="Pokemon">
+    <h3>{{pokemon.name}}</h3>
+    <p>Type: {{pokemon.types}}</p>
+    <p>Height:{{pokemon.height}}</p>
+    <p>Health:{{pokemon.health}}</p>
+    <p>Attack Power:{{pokemon.atack}}</p>
+  </div>
+  </div>
+
+  </div>
+
+
+
+

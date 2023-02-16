@@ -1,0 +1,85 @@
+@media screen and (min-width:600px){}
+.header{
+  width: 100%;
+  background-color: red;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:space-between;
+  align-items: center;
+  @media screen and (max-width:600px){
+  }
+  .header__img{
+    width: 100px;
+    @media screen and (max-width:600px){
+      width: 65px;
+    }
+  }
+
+  .header__log{
+    width: 50px;
+    padding: 4px;
+    @media screen and (max-width:600px){
+      width: 65px;
+    }
+  }
+  
+  &__a{
+    text-decoration: none;
+    color: white;
+  }
+
+  &__button{
+    border: none;
+    background-color: transparent;
+    color: rgb(250, 250, 250);
+    margin-right: 10px;
+    display: none;
+      @media screen and (max-width:600px){
+        font-size: 25px;
+        color: white;
+        display: flex;
+
+    }
+  }
+
+
+
+
+  &__nav{
+    @media screen and (max-width:600px){
+      width: 100%;
+      height: 0vh;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      pointer-events: none;
+      transition: all .5s ease;
+      &--activo{
+        height: 50vh;
+        pointer-events: auto;
+
+
+      }
+    }
+  }
+
+  ul{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 10px;
+    @media screen and (max-width:600px){
+      flex-direction: column;
+
+    }
+  }
+  &__li{
+    list-style: none;
+    margin: 0 .5em;
+    @media screen and (max-width:600px){
+      margin: .5em 0;
+    }
+  }
+}

@@ -1,0 +1,450 @@
+POKEMON-LIST-COMPONENT.TS
+
+import { LocationStrategy } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../service/data.service';
+
+@Component({
+  selector: 'app-pokemon-list',
+  templateUrl: './pokemon-list.component.html',
+  styleUrls: ['./pokemon-list.component.scss']
+})
+export class PokemonListComponent implements OnInit {
+  pokemons:any[]=[];
+  page=1;
+ /*  totalPokemons!: number; */
+
+
+
+  constructor(
+    private dataService: DataService
+  ){}
+
+
+
+
+    ngOnInit():void{
+      this.dataService.getPokemons()
+      .subscribe((response:any)=>{
+        /* this.totalPokemons=response.count; */
+
+        response.results.forEach((result: { name: string; }) => {
+          this.dataService.getMoreData(result.name)
+          .subscribe((response:any)=>{
+            /* this.pokemons.push(response); */
+            let type='';
+      
+            response.types.forEach((element: any) => {
+              type=type+element.type.name.charAt(0).toUpperCase()+element.type.name.slice(1)+' '
+            });
+
+            this.pokemons.push({
+                  'name':response.name.charAt(0).toUpperCase()+response.name.slice(1),
+                  'img':response.sprites.front_default,
+                'height':response.height,
+                'health':response.stats[0].base_stat,
+                'atack':response.stats[1].base_stat,
+                'types':type});
+          
+
+          })
+        });
+      });
+    }
+
+    typesPoke(typeSelect:any):void{
+      this.pokemons=[]
+      this.dataService.getPokemons()
+      .subscribe((response:any)=>{
+        /* this.totalPokemons=response.count; */
+
+        response.results.forEach((result: { name: string; }) => {
+          this.dataService.getMoreData(result.name)
+          .subscribe((response:any)=>{
+            /* this.pokemons.push(response); */
+            let type='';
+      
+            response.types.forEach((element: any) => {
+              type=type+element.type.name.charAt(0).toUpperCase()+element.type.name.slice(1)+' '
+            });
+            
+            if(type.includes(typeSelect)) {
+                
+            
+                this.pokemons.push({
+                  'name':response.name.charAt(0).toUpperCase()+response.name.slice(1),
+                  'img':response.sprites.front_default,
+                'height':response.height,
+                'health':response.stats[0].base_stat,
+                'atack':response.stats[1].base_stat,
+                'types':type});
+              }
+
+          })
+        });
+      });
+    }
+}
+
+
+
+                                                            POKEMON-LIST-COMPONENT.HTML
+
+<button (click)="typesPoke('Fire')">Fire</button>
+<button (click)="typesPoke('Water')">Water</button>
+<div #asgalery id="galery" class="pokemon-grid">
+  <div id="{{pokemon.name}}" class="box"
+  *ngFor="let pokemon of pokemons  "> <!--paginate:{ itemsPerPage: 10, currentPage: page, totalItems: totalPokemons} -->
+    <img [src]="pokemon.img" alt="Pokemon">
+    <h3>{{pokemon.name}}</h3>
+    <p>Type: {{pokemon.types}}</p>
+    <p>Height:{{pokemon.height}}</p>
+    <p>Health:{{pokemon.health}}</p>
+    <p>Attack Power:{{pokemon.atack}}</p>
+  </div>
+
+</div>
+
+                                                         POKEMON-LIST-COMPONENT.SCSS
+
+@media screen and (min-width:600px){
+
+.pokemon-grid{
+display:grid;
+grid-gap:16px;
+padding: 20px;
+grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+}
+
+.pokemon-grid-prin{
+  display:grid;
+  grid-gap:16px;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+  }
+
+.box{
+  width:100%;
+  height: 300px;
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
+  display: grid;
+  text-align: center;
+  background-color: blue;
+}
+
+
+ img{
+  max-width: 100px;
+  display: block;
+  margin: 0 auto;
+}
+}
+
+
+@media screen and (max-width:600px){
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.pokemon-grid{
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
+  background-color: rgba(0, 0, 0, 0.712);
+
+}
+
+.box{
+  margin: 30px 0px 30px 60px;
+  padding-bottom: 10px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.74);
+
+  text-align: center;
+  background-color: red;
+  color: white;
+  width: 150px;
+}
+
+}
+
+                                                                POKEMON-SEARCH-COMPONENT.HTML
+
+<div class="buscador">
+  <img class="buscador" src="../../assets/img/Logo (1) 1.png"alt="">
+  <br>
+  <input type="text" placeholder="Search pokemon" [(ngModel)]="name" >
+  <input type="hidden"  #ascantidad  [(ngModel)]="cantidad" id="cantidad">
+  <input type="hidden"  #ascantidad  [(ngModel)]="lista" id="lista">
+  <br>
+  <button class="go" (click)="search()">Start</button>
+  <button class="sear" (click)="reset()">Reset</button>
+  <div #asmensaje  id="mensaje" style="color:red">{{mensaje}} </div>
+  <div #astarjeta id="tarjeta" ></div>
+
+  </div>
+
+
+
+                                                               POKEMON-SEARCH-COMPONENT.SCSS
+
+@media screen and (max-width:600px){
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+ .buscador img{
+  width: 200px;
+
+}
+
+
+.buscador{
+  /* margin: 20px 0px 20px 70px; */
+  text-align: center;
+  margin-top: 30px;
+}
+
+.buscador input{
+ /*  margin-left: 200px; */
+  width: 300px;
+  height: 30px;
+  border: solid 1px black;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.buscador button{
+   margin-top: 20px; 
+  width: 50px;
+  height: 25px;
+  justify-content: center;
+}
+
+
+
+#tarjeta{
+  margin: 0px 30px ;
+  width: 300px;
+
+  
+  
+
+ 
+}
+
+#tarjeta .box{
+ margin-bottom: 20px;
+ background-color: red;
+ padding-bottom: 20px;
+}
+
+.col1{
+ /*  width:30% !important; */
+ margin: 10px;
+ }
+
+.col1 img{
+  width: 200px;
+} 
+
+#mensaje{
+  justify-content: center;
+}
+
+
+
+
+
+
+}
+
+/**********************/
+/* style for desktop */
+/**********************/
+
+@media screen and (min-width:605px){
+
+  .buscador {
+    justify-content: center;
+    text-align: center;
+    
+  }
+
+  button{
+    width: 45px;
+    margin: 0px 10px;
+  }
+
+  #tarjeta{
+    margin: 20px 10px;
+    width: 90%;
+    display:flex;
+    grid-gap:30px;
+    padding: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+    }
+
+  .listo-tarjeta{
+    background-color: #ffcf00e6;
+    border: solid 5px #0e16e3
+  }
+
+
+
+.pokemon-grid{
+  display:grid;
+  grid-gap:16px;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+  }
+
+  .pokemon-grid-prin{
+    display:grid;
+    grid-gap:16px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+    }
+
+  .box{
+    width:100%;
+    height: 200px;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
+    display: grid;
+    text-align: center;
+    background-color: blue;
+    padding-bottom: 20px;
+    color: white;
+  }
+
+
+   img{
+    /* max-width: 100px; */
+    display: block;
+    margin: 0 auto;
+  }
+ .col1{
+  width:30% !important;
+ }
+
+
+}
+
+
+                                                                       POKEMON-SEARCH-COMPONENT.TS
+
+import { style } from '@angular/animations';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { PokemonService } from '../service/pokemon.service';
+@Component({
+  selector: 'app-pokemon-search',
+  templateUrl: './pokemon-search.component.html',
+  styleUrls: ['./pokemon-search.component.scss']
+})
+export class PokemonSearchComponent implements OnInit{
+  name!:string;
+  cantidad:number=0;
+  lista:string='';
+  mensaje:string=''
+  
+  //es un referencia de la vista pokemen-seach.html astarjeta y asmensaje
+  @ViewChild('astarjeta') tarjeta!: ElementRef;
+
+
+  constructor( private pokemonService: PokemonService, private renderer2:Renderer2){}
+
+  ngOnInit(): void {
+
+  }
+  reset(){
+    const tarjeta = document.getElementById('tarjeta');
+    const astarjeta=this.tarjeta.nativeElement
+    tarjeta!.innerHTML=''  // limpitar tarjeta
+    this.mensaje=''
+    this.renderer2.removeClass(astarjeta, 'listo-tarjeta') // removeClass listo
+    this.cantidad=0 //inicializar variable
+    this.lista='' 
+  }
+
+  search(){
+
+
+      const astarjeta=this.tarjeta.nativeElement
+      this.mensaje=''
+
+       //verificar si ya existe el pokemon selecionado
+       if(this.lista.includes(this.name.toLowerCase())) {
+         this.mensaje='Ya eligio el pokemon: '+this.name
+       }else if(this.cantidad>5){
+        // se verifica que solo ingrese 6 pokemon y se envia mensaje
+        this.mensaje='Solo puede ingresar 6 pokemon'
+    }else{
+       
+        // se llama servicio de getPokemon API
+        this.pokemonService.getPokemon(this.name.toLowerCase()).subscribe(
+          (d:any) =>{
+          
+          this.cantidad=this.cantidad+1; 
+          this.lista= this.lista+','+ d.name
+          const div =this.renderer2.createElement('div')
+          const img =this.renderer2.createElement('img')
+          const h3 =this.renderer2.createElement('h3')
+          const Type =this.renderer2.createElement('p')
+          const Height =this.renderer2.createElement('p')
+          const Health =this.renderer2.createElement('p')
+          const Attack =this.renderer2.createElement('p')
+
+          this.renderer2.addClass(div, 'box')
+          this.renderer2.setAttribute(img, 'src',d.sprites.front_default)
+          this.renderer2.addClass(div, 'col1')
+          this.renderer2.appendChild(div,img )
+          this.renderer2.appendChild(h3,this.renderer2.createText(d.name.charAt(0).toUpperCase()+d.name.slice(1)))
+          this.renderer2.appendChild(div,h3 )
+
+          this.renderer2.appendChild(Type,this.renderer2.createText('Type: '+d.types[0].type.name.charAt(0).toUpperCase()+d.types[0].type.name.slice(1) ))
+          this.renderer2.appendChild(Height,this.renderer2.createText('Height: '+d.height ))
+          this.renderer2.appendChild(Health,this.renderer2.createText('Health: '+d.stats[0].base_stat))
+          this.renderer2.appendChild(Attack,this.renderer2.createText('Attack Power: '+d.stats[1].base_stat))
+          this.renderer2.appendChild(div,Type )
+          this.renderer2.appendChild(div,Height )
+          this.renderer2.appendChild(div,Health )
+          this.renderer2.appendChild(div,Attack )
+          
+          this.renderer2.appendChild(astarjeta,div )
+
+          if(this.cantidad==6){
+            //agrega clases nueva para la tarjeta y se indica que esta listo 
+            this.renderer2.addClass(astarjeta, 'listo-tarjeta')
+            this.mensaje='Estas listo para la Batalla '
+  
+          }
+
+        },(error :any) =>{
+          //se verifica el error
+          this.mensaje='El pokemon no existe'
+          
+        }
+        )
+
+         //this.renderer2.addClass(astarjeta, 'pokemon-grid')
+    
+       
+  
+      }
+
+
+
+  }
+
+}

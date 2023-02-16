@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<div class="grid-layout">
+<button class="boton efecto" style="background-color: red;" (click)="typesPoke('Fire')">Fire</button>
+<button class="boton efecto" style="background-color: blue;"  (click)="typesPoke('Water')">Water</button>
+<button class="boton efecto" style="background-color: rgb(6, 204, 6);" (click)="typesPoke('Grass ')">Grass </button>
+<button class="boton efecto" style="background-color: rgb(248, 7, 248);" (click)="typesPoke('Poison')">Poison</button>
+<button class="boton efecto" style="background-color: rgb(77, 73, 73);" (click)="typesPoke('Bug')">Bug</button>
+<button class="boton efecto" style="background-color: rgba(9, 245, 233, 0.705);" (click)="typesPoke('Flying')">Flying</button>
+<button class="boton efecto" style="background-color: rgb(245, 170, 9);" (click)="typesPoke('Normal')">Normal</button>
+<button class="boton efecto" style="background-color: rgb(200, 150, 202);"(click)="typesPoke('Fairy')">Fairy</button>
+<button class="boton efecto" style="background-color: rgb(0, 255, 191);" (click)="typesPoke('Psychic')">Psychic</button>
+<button class="boton efecto" style="background-color: #f8f32b" (click)="typesPoke('Electric')">Electric</button>
+
+</div>
+<div class="boton efecto">
+<img class="poke"  src="assets/img/poke.ball.png" alt="">
+</div>
+
+
+<div  #asgalery id="galery" class="pokemon-grid">
+  <div class="boton efecto" id="{{pokemon.name}}" class="box {{clase_fondo}}"
+  *ngFor="let pokemon of pokemons  ">
+    <img class="boton efecto" [src]="pokemon.img" alt="Pokemon">
+    <h3>{{pokemon.name}}</h3>
+    <p>Type: {{pokemon.types}}</p>
+    <p>Height:{{pokemon.height}}</p>
+    <p>Health:{{pokemon.health}}</p>
+    <p>Attack Power:{{pokemon.atack}}</p>
+  </div>
+</div>

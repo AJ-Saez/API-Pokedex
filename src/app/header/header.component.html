@@ -1,0 +1,15 @@
+<header class="header">
+  <img class="header__log" src="assets/img/mi-logo.jpg" alt="">
+  <div class="header__logo">
+    <img class="header__img" src="assets/img/title-poke.png" alt="title">
+  </div>
+  <button (click)="setActive()" class="header__button">
+    <i class=" icono fa-solid fa-bars"></i>
+  </button>
+  <nav class="header__nav " [ngClass]="{'header__nav--activo' :active}">
+    <ul>
+      <li class="header__li"> <a href="" class="header__a">Home</a></li>
+      <li class="header__li"> <a href="type" class="header__a">Types</a></li>
+    </ul>
+  </nav>
+</header>
